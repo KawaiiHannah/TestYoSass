@@ -1,0 +1,36 @@
+/**
+ * Run the tests we have in our global test map
+ * @return string Log of the test results
+ */
+@mixin _run_tests() {
+	$tys_tests: $tys_tests !global;
+
+	// Loop through each test and output info
+	@each $slug, $test in $tys_tests {
+		@include _test_result( $slug, $test );
+	}
+
+	// Output final debug numbers
+	@debug "Passed Tests: #{ $tys_tests_passed }";
+	@debug "Failed Tests: #{ $tys_tests_failed }";
+	tests_passed: #{ $tys_tests_passed };
+	tests_failed: #{ $tys_tests_failed };
+}
+
+
+/**
+ * Output each test result
+ * @param  string $slug The slugified string of the test name
+ * @param  map $test Map containing the test information
+ * @return string       CSS styled output with the result of the test
+ */
+@mixin _test_result( $slug, $test ) {
+	$tys_config: $tys_config !global;
+
+	#{ map-get( $tys_config, 'prefix' ) }#{ $slug } {
+		test: map-get( $test, 'name' );
+		value: map-get( $test, 'value' );
+		expected: map-get( $test, 'expected' );
+		result: _test_pass_or_fail( map-get( $test, 'value' ), map-get( $test, 'expected' ) );
+	}
+}

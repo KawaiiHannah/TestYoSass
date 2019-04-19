@@ -1,0 +1,36 @@
+/**
+ * Set up a new function test.
+ * @param string $name A slugified version of the test name.
+ * @param map $test Sass map containing the test elements. Human readable name, returned value and expected return value.
+ */
+@function _add_test( $name, $test ) {
+	$test: (
+		#{ $name }: $test
+	);
+	$tys_tests: map-merge( $tys_tests, $test ) !global;
+	@return null;
+}
+
+
+/**
+ * Check if a value passes or fails the test. Increase pass and fail global variables.
+ * @param  mixed $value The value returned by the function we're testing.
+ * @param  mixed $expected The value we expect to get from the test function.
+ * @return string       Return a PASS or FAIL string. 
+ */
+@function _test_pass_or_fail( $value, $expected ) {
+	$tys_tests_passed: $tys_tests_passed !global;
+	$tys_tests_failed: $tys_tests_failed !global;
+
+	@if ( $value == $expected ) {
+		$tys_tests_passed: ( $tys_tests_passed + 1 ) !global;
+		@if ( map-get( $tys_config, 'debug_on_pass' ) == true ) {
+			@debug "#{ map-get( $test, 'name' ) }: PASSED";
+		}
+		@return 'PASS';
+	} @else {
+		$tys_tests_failed: ( $tys_tests_failed + 1 ) !global;
+		@error "#{ map-get( $test, 'name' ) }: FAILED";
+		@return 'FAIL';
+	}
+}
