@@ -1,10 +1,9 @@
 {
   "name": "test-yo-sass",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A (really) simple testing framework for Sass functions",
   "main": "_tys.scss",
   "scripts": {
-    "sass:test": "node-sass themes/whyfi/assets/scss/tests.scss themes/whyfi/assets/css/tests.css -q"
   },
   "repository": {
     "type": "git",

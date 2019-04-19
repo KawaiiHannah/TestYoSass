@@ -14,6 +14,7 @@
 
 /**
  * Check if a value passes or fails the test. Increase pass and fail global variables.
+ * @param  mixed $name Human readable name of the test for Sass error reporting.
  * @param  mixed $value The value returned by the function we're testing.
  * @param  mixed $expected The value we expect to get from the test function.
  * @return string       Return a PASS or FAIL string. 
