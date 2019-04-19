@@ -10,4 +10,5 @@ $tys_tests_failed: 0;
 
 $tys_config: (
 	debug_on_pass: false,
+	prefix: '#TestYoSass_';
 ) !default; // Set as default to allow changes
