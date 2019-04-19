@@ -31,6 +31,6 @@
 		test: map-get( $test, 'name' );
 		value: map-get( $test, 'value' );
 		expected: map-get( $test, 'expected' );
-		result: _test_pass_or_fail( map-get( $test, 'value' ), map-get( $test, 'expected' ) );
+		result: _test_pass_or_fail( map-get( $test, 'name' ), map-get( $test, 'value' ), map-get( $test, 'expected' ) );
 	}
 }

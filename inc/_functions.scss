@@ -18,19 +18,19 @@
  * @param  mixed $expected The value we expect to get from the test function.
  * @return string       Return a PASS or FAIL string. 
  */
-@function _test_pass_or_fail( $value, $expected ) {
+@function _test_pass_or_fail( $name, $value, $expected ) {
 	$tys_tests_passed: $tys_tests_passed !global;
 	$tys_tests_failed: $tys_tests_failed !global;
 
 	@if ( $value == $expected ) {
 		$tys_tests_passed: ( $tys_tests_passed + 1 ) !global;
 		@if ( map-get( $tys_config, 'debug_on_pass' ) == true ) {
-			@debug "#{ map-get( $test, 'name' ) }: PASSED";
+			@debug "#{ $name }: PASSED";
 		}
 		@return 'PASS';
 	} @else {
 		$tys_tests_failed: ( $tys_tests_failed + 1 ) !global;
-		@error "#{ map-get( $test, 'name' ) }: FAILED";
+		@warn "#{ $name }: FAILED";
 		@return 'FAIL';
 	}
 }
